@@ -1,3 +1,5 @@
+# Esta aplicação se conecta a uma IA para oferecer sugestões de livros ao usuário. CUIDADO: serviço pago
+
 # APIs
 
 ## [] - cadastrar um livro

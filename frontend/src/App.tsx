@@ -1,9 +1,12 @@
+import { BooksProvider } from "./context/booksContext";
 import AppRoutes from "./routes";
 
 function App() {
 
   return (
-    <AppRoutes />
+    <BooksProvider>
+      <AppRoutes />
+    </BooksProvider>
   )
 }
 

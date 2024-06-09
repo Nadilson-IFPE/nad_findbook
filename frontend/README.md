@@ -1,3 +1,5 @@
+# Esta aplicação se conecta a uma IA para oferecer sugestões de livros ao usuário. CUIDADO: serviço pago
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

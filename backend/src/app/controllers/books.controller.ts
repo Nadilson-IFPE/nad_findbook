@@ -25,10 +25,12 @@ class BooksController {
   }
 
   async find(httpRequest: HttpRequest): Promise<HttpResponse> {
-    const dto: BookDto = httpRequest.query;
+   // const dto: BookDto = httpRequest.query;
+    const search: string = httpRequest.query.search;
 
     try {
-      const response = await this.booksUseCase.findBook(dto);
+      //const response = await this.booksUseCase.findBook(search);
+      const response = await this.booksUseCase.searchBooks(search);
       return {
         status: 200,
         message: 'Book found',

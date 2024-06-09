@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
 
-type Props = {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
     placeholder: string;
-};
+}
 
 const Input = forwardRef<HTMLInputElement, Props>(
     ({ placeholder, ...rest }: Props, ref) => {

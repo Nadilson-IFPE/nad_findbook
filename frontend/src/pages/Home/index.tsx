@@ -1,10 +1,12 @@
-import { useCallback, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import Button from "../../components/Button/Button";
 import Container from "../../components/Container/Container";
 import Header from "../../components/Header/Header";
 import Title from "../../components/Title/Title";
 import Input from "../../components/Input/Input";
 import Card from "../../components/Card/Card";
+import searchBooks from "../../services/books";
+import { BooksContext } from "../../context/booksContext";
 
 
 const genderBooks = [
@@ -18,6 +20,7 @@ const genderBooks = [
 
 const Home = () => {
     const [selectedGender, setSelectedGender] = useState<string[]>([]);
+    const { books, handleSetBooks } = useContext(BooksContext);
 
     // console.log("Home - selectedGender:", selectedGender);
 
@@ -32,6 +35,11 @@ const Home = () => {
             setSelectedGender([...selectedGender, title]);
         }
     }, [selectedGender]);
+
+    const handleSubmit = useCallback(async (value: string) => {
+        const response = await searchBooks(value);
+        handleSetBooks(response);
+    }, [handleSetBooks]);
 
     return (
         <div className="mb-6">
@@ -52,12 +60,23 @@ const Home = () => {
                     <p className="text-evergreen font-semibold text-2xl ">
                         Sobre o que você gostaria de receber uma recomendação de livro?
                     </p>
-                    <Input placeholder="Eu gostaria de ler..." />
+                    <Input placeholder="Eu gostaria de ler..." onKeyDown={(e: any) => {
+                        if (e.key === 'Enter') {
+                            handleSubmit(e.target?.value);
+                        }
+                    }} />
                 </div>
 
                 <Title title="Livros  recomendados" className="my-5" />
 
-                <Card id={"123"} />
+                <div className="grid md:grid-cols-3 gap-4">
+                    {books.map((book, index) => {
+                        return (
+                            <Card key={index} id={book._id} book={book} />
+                        )
+                    })}
+                </div>
+
 
             </Container>
         </div>
